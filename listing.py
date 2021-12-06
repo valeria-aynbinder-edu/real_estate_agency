@@ -6,6 +6,12 @@ class Listing:
         self.property = property
         self.availability_date = availability_date
 
+    def __str__(self):
+        return f"{self.property}\nAvailable from: {self.availability_date}"
+
+    def __repr__(self):
+        return f"{self.__class__.__name__}: {self.property.address}"
+
 
 class RentListing(Listing):
     def __init__(self, property: Property, availability_date: str, monthly_rent: float, pets_allowed: bool):

@@ -1,3 +1,5 @@
+from agency import Agency
+from listing import Listing, RentListing, SaleListing
 from property import Flat, Villa, Commercial, Property
 
 ISRAEL = 'Israel'
@@ -23,9 +25,28 @@ if __name__ =='__main__':
                             parking_places=10, sq_m=500)
     commercial.add_activity('store', 'caffe')
 
-    print(flat)
+    # Creation of listings
+    # 1.The first property is both for rent for $2K per month and
+    # for sale for $800K. Available starting from 01-01-2022
+    flat_for_rent_listing = RentListing(flat, '01-01-2022', 2000, pets_allowed=False)
+    flat_for_sale_listing = SaleListing(flat, '01-01-2022', 800000)
 
-    print("test property print")
-    prop = Property(country='France', city='Paris', address='blabla 47',
-                            parking_places=1, sq_m=500)
-    print(prop)
+    # 2.This property is for sale for $2M, available from 01-04-2023
+    villa_for_sale = SaleListing(villa, '01-04-2023', 2000000)
+
+    # 3. For rent for $20K per month
+    commercial_for_rent = RentListing(commercial, '01-04-2023', 20000, pets_allowed=False)
+
+    agency = Agency("ZebraRealEstate")
+    agency.add_listing(flat_for_rent_listing)
+    agency.add_listing(flat_for_sale_listing)
+    agency.add_listing(villa_for_sale)
+    agency.add_listing(commercial_for_rent)
+
+    print(agency.get_listings(for_sale=False))
+    # print(agency.get_most_expensive_listing())
+
+
+
+
+
