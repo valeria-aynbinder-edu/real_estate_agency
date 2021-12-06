@@ -1,4 +1,4 @@
-from property import Flat, Villa, Commercial
+from property import Flat, Villa, Commercial, Property
 
 ISRAEL = 'Israel'
 
@@ -21,4 +21,11 @@ if __name__ =='__main__':
     # The area of the property is 500 square meters
     commercial = Commercial(country='Britain', city='London', address='Oxford 47',
                             parking_places=10, sq_m=500)
-    commercial.allowed_activities.extend(['store', 'caffe'])
+    commercial.add_activity('store', 'caffe')
+
+    print(flat)
+
+    print("test property print")
+    prop = Property(country='France', city='Paris', address='blabla 47',
+                            parking_places=1, sq_m=500)
+    print(prop)
