@@ -1,4 +1,5 @@
 from agency import Agency
+from errors import ParamsError
 from listing import Listing, RentListing, SaleListing
 from property import Flat, Villa, Commercial, Property
 
@@ -43,8 +44,12 @@ if __name__ =='__main__':
     agency.add_listing(villa_for_sale)
     agency.add_listing(commercial_for_rent)
 
-    print(agency.get_listings(for_sale=False))
-    # print(agency.get_most_expensive_listing())
+    try:
+        print(agency.get_listings(for_sale=False, for_rent=False))
+    except ParamsError as error:
+        print(f"There is a problem: {error}")
+    print(agency.get_most_expensive_listing())
+
 
 
 

@@ -1,3 +1,4 @@
+from errors import ParamsError
 from listing import Listing, SaleListing, RentListing
 
 
@@ -12,6 +13,8 @@ class Agency:
 
     # implement
     def get_listings(self, for_sale=True, for_rent=True):
+        if for_sale == False and for_rent == False:
+            raise ParamsError(msg="No listings to return")
         ret_list = []
         for listing in self.listings:
             if (for_sale and isinstance(listing, SaleListing)) or \
@@ -25,9 +28,9 @@ class Agency:
         max_rent_listing = None
         # todo: valeria discuss options to improve performance
         for l in self.listings:
-            if isinstance(l, RentListing) and l.monthly_rent > max_rent_listing.monthly_rent:
+            if isinstance(l, RentListing) and (not max_rent_listing or l.monthly_rent > max_rent_listing.monthly_rent):
                 max_rent_listing = l
-            if isinstance(l, SaleListing) and l.price > max_sale_listing.price:
+            if isinstance(l, SaleListing) and (not max_sale_listing or l.price > max_sale_listing.price):
                 max_sale_listing = l
         return max_sale_listing, max_rent_listing
 
